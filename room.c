@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <string.h>
 #include "room.h"
 
@@ -7,4 +8,13 @@ void init_room(Room *r, const char *name, const char *description) {
   for(int i = 0; i < 4; i++) {
     r->exits[i] = NULL;
   } 
+}
+
+void print_room(Room *r) {
+  printf("%s\n", r->name);
+  printf("%s\n", r->description);
+  const char *directions[4] = {"North", "South", "East", "West"};
+  for(int i = 0; i < 4; i++) {
+    if(r->exits[i]) printf("Exit: %s\n", directions[i]);
+  }
 }

@@ -8,5 +8,6 @@ typedef struct Room {
 } Room;
 
 void init_room(Room *r, const char *name, const char *description);
+void print_room(Room *r);
 
 #endif
