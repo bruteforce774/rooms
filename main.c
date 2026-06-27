@@ -24,6 +24,21 @@ int main() {
       if(current->exits[0]) current = current->exits[0];
       else printf("No exit that way.\n");
     }
+
+    if(!strcmp(input, "go south")) {
+      if(current->exits[1]) current = current->exits[1];
+      else printf("No exit that way.\n");
+    }
+
+    if(!strcmp(input, "go east")) {
+      if(current->exits[2]) current = current->exits[2];
+      else printf("No exit that way.\n");
+    }
+
+    if(!strcmp(input, "go west")) {
+      if(current->exits[3]) current = current->exits[3];
+      else printf("No exit that way.\n");
+    }
   }
 
   return 0;
