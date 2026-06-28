@@ -3,12 +3,24 @@
 #include "room.h"
 
 int main() {
-  Room forest, cave;
+  Room forest, cave, meadow, river, ruins;
+
   init_room(&forest, "Forest", "A dark, dense forest.");
   init_room(&cave, "Cave", "A cold, damp cave.");
+  init_room(&meadow, "Meadow", "A wide open meadow with tall grass swaying in the breeze.");
+  init_room(&ruins, "Ruins", "Ancient stone ruins, crumbling and covered in moss.");
+  init_room(&river, "River", "A rushing river with cold, clear flowing water over smooth stones.");
 
   forest.exits[0] = &cave; // forest -> N -> cave
+  forest.exits[1] = &meadow; // forest -> S -> meadow
+  forest.exits[2] = &ruins; // forest -> E -> ruins
+  forest.exits[3] = &river; // forest -> W -> river
+  
   cave.exits[1] = &forest; // cave -> S -> forest
+  meadow.exits[0] = &forest; // meadow -> N -> forest
+  ruins.exits[3] = &forest; // ruins -> W -> forest
+  river.exits[2] = &forest; // river -> E -> forest
+
   Room *current = &forest;
   
   while(1) {
