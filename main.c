@@ -11,6 +11,9 @@ int main() {
   init_room(&ruins, "Ruins", "Ancient stone ruins, crumbling and covered in moss.");
   init_room(&river, "River", "A rushing river with cold, clear flowing water over smooth stones.");
 
+  add_item(&forest, create_item("Stick"));
+  add_item(&cave, create_item("Torch"));
+
   forest.exits[0] = &cave; // forest -> N -> cave
   forest.exits[1] = &meadow; // forest -> S -> meadow
   forest.exits[2] = &ruins; // forest -> E -> ruins

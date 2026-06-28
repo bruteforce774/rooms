@@ -18,4 +18,14 @@ void print_room(Room *r) {
   for(int i = 0; i < 4; i++) {
     if(r->exits[i]) printf("Exit: %s\n", directions[i]);
   }
+  Item *i = r->items;
+  while(i) {
+    printf("Item: %s\n", i->name);
+    i = i->next;
+  }
+}
+
+void add_item(Room *r, Item *item) {
+  item->next = r->items;
+  r->items = item;
 }

@@ -12,5 +12,6 @@ typedef struct Room {
 
 void init_room(Room *r, const char *name, const char *description);
 void print_room(Room *r);
+void add_item(Room *r, Item *item);
 
 #endif
