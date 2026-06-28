@@ -10,8 +10,10 @@ typedef struct Room {
   Item *items;
 } Room;
 
+void to_lower(char *str);
 void init_room(Room *r, const char *name, const char *description);
 void print_room(Room *r);
 void add_item(Room *r, Item *item);
+Item *take_item(Room *r, const char *name);
 
 #endif

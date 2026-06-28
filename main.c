@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "room.h"
+#include "player.h"
 
 int main() {
   Room forest, cave, meadow, river, ruins;
@@ -11,8 +12,8 @@ int main() {
   init_room(&ruins, "Ruins", "Ancient stone ruins, crumbling and covered in moss.");
   init_room(&river, "River", "A rushing river with cold, clear flowing water over smooth stones.");
 
-  add_item(&forest, create_item("Stick"));
-  add_item(&cave, create_item("Torch"));
+  add_item(&forest, create_item("stick"));
+  add_item(&cave, create_item("torch"));
 
   forest.exits[0] = &cave; // forest -> N -> cave
   forest.exits[1] = &meadow; // forest -> S -> meadow
@@ -25,7 +26,10 @@ int main() {
   river.exits[2] = &forest; // river -> E -> forest
 
   Room *current = &forest;
-  
+  Player player;
+  strcpy(player.name, "Hero");
+  player.inventory = NULL;
+
   while(1) {
     print_room(current);
     char input[50];
@@ -53,6 +57,24 @@ int main() {
     if(!strcmp(input, "go west")) {
       if(current->exits[3]) current = current->exits[3];
       else printf("No exit that way.\n");
+    }
+
+    // check that input starts with "take "
+    if(!strncmp(input, "take ", 5)) { 
+      // pointer arithmetic to skip "take "
+      char *item_name = input + 5;
+      // use lowercase for comparison
+      to_lower(item_name);
+      // search room, remove if found
+      Item *item = take_item(current, item_name);
+      if(item) {
+        // prepend item to player's inventory list
+        item->next = player.inventory;
+        player.inventory = item;
+        printf("You take the %s.\n", item->name);
+      } else {
+        printf("No item with that name here.\n");
+      }
     }
   }
 
